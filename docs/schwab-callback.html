@@ -1,1 +1,150 @@
-<h1>Schwab OAuth Callback</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schwab Authorization Callback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: #28a745;
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #c3e6cb;
+            margin-bottom: 20px;
+        }
+        .code-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 15px 0;
+        }
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .copy-btn:hover {
+            background: #0056b3;
+        }
+        .instructions {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Schwab API Authorization</h1>
+        
+        <div id="success-section" style="display: none;">
+            <div class="success">
+                ✅ Authorization successful! Your authorization code has been received.
+            </div>
+            
+            <h3>Authorization Code:</h3>
+            <div class="code-box" id="auth-code"></div>
+            <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+            
+            <div class="instructions">
+                <h4>Next Steps:</h4>
+                <ol>
+                    <li>Copy the authorization code above</li>
+                    <li>Go to your trading bot terminal</li>
+                    <li>Use this URL: <code>http://127.0.0.1:8080/schwab-token?code=YOUR_CODE_HERE</code></li>
+                    <li>Or paste the code when prompted by your application</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div id="error-section" style="display: none;">
+            <div class="error">
+                ❌ No authorization code found in the URL. Please try the authorization process again.
+            </div>
+        </div>
+        
+        <div id="loading-section">
+            <p>🔄 Processing authorization callback...</p>
+        </div>
+    </div>
+
+    <script>
+        // Extract code from URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Copy code to clipboard
+        function copyCode() {
+            const codeElement = document.getElementById('auth-code');
+            navigator.clipboard.writeText(codeElement.textContent).then(function() {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Process the callback
+        window.onload = function() {
+            const code = getUrlParameter('code');
+            const error = getUrlParameter('error');
+            
+            document.getElementById('loading-section').style.display = 'none';
+            
+            if (code) {
+                document.getElementById('auth-code').textContent = code;
+                document.getElementById('success-section').style.display = 'block';
+                
+                // Also log to console for easy access
+                console.log('Authorization Code:', code);
+            } else if (error) {
+                document.getElementById('error-section').innerHTML = `
+                    <div class="error">
+                        ❌ Authorization failed: ${error}
+                        <br>
+                        Description: ${getUrlParameter('error_description') || 'Unknown error'}
+                    </div>
+                `;
+                document.getElementById('error-section').style.display = 'block';
+            } else {
+                document.getElementById('error-section').style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>

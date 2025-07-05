@@ -23,7 +23,7 @@ def get_secret(key: str) -> Optional[str]:
         
         # Fallback to secrets.json file
         # Use absolute path relative to the project root (trading-bot directory)
-        secrets_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'secrets.json')
+        secrets_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secrets.json')
         if os.path.exists(secrets_path):
             with open(secrets_path, 'r') as f:
                 secrets = json.load(f)

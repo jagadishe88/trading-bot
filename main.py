@@ -98,19 +98,21 @@ def test_alert():
     send_alert(test_data)
     return jsonify({"status": "success", "message": "Test alert sent", "test_data": test_data})
 
-# === ✅ UPDATED SCHWAB OAUTH ROUTES ===
+# === ✅ SCHWAB OAUTH ROUTES ===
 
 @app.route("/schwab-auth")
 def schwab_auth():
     import urllib.parse
-    from utils import get_secret
-
-    client_id = get_secret("SCHWAB_CLIENT_ID")
-    redirect_uri = "https://postman-echo.com/get"  # Match the registered callback URL
+    
+    # Extract just the client ID without @SCHWAB.DEV suffix
+    full_client_id = get_secret("SCHWAB_CLIENT_ID")
+    client_id = full_client_id.replace("@SCHWAB.DEV", "")  # Remove suffix for API calls
+    
+    redirect_uri = get_secret("SCHWAB_REDIRECT_URI")
     auth_url = "https://api.schwabapi.com/v1/oauth/authorize"
     
     params = {
-        "client_id": client_id,
+        "client_id": client_id,  # Use clean client ID
         "response_type": "code",
         "redirect_uri": redirect_uri,
         "scope": "readonly"
@@ -118,10 +120,12 @@ def schwab_auth():
     full_url = f"{auth_url}?{urllib.parse.urlencode(params)}"
     return {
         "auth_url": full_url,
+        "client_id_used": client_id,
+        "redirect_uri": redirect_uri,
         "instructions": """
         1. Click the auth_url link to authorize
-        2. After authorization, you'll be redirected to https://postman-echo.com/get
-        3. Look for 'code' parameter in the URL or response
+        2. After authorization, you'll be redirected to your GitHub Pages callback
+        3. Look for 'code' parameter in the URL
         4. Copy that code value and use it with /schwab-token endpoint
         """
     }
@@ -155,12 +159,9 @@ def schwab_status():
     api = SchwabAPI()
     
     if api.access_token:
-        # Test with a sample quote (assuming get_quote is implemented)
-        test_quote = {"symbol": "AAPL", "price": "Placeholder"}  # Replace with actual get_quote logic
         return {
             "authenticated": True,
             "token_expires": api.token_expires.isoformat() if api.token_expires else None,
-            "test_quote": test_quote,
             "status": "Ready for trading"
         }
     else:
@@ -189,9 +190,3 @@ def status():
 if __name__ == "__main__":
     print("🚀 Starting Flask server for local testing...")
     app.run(host="0.0.0.0", port=8080, debug=True)
-
-
-@app.route("/test-secrets")
-def test_secrets():
-    secrets = load_all_secrets()
-    return jsonify({"secrets": secrets, "validation": validate_secrets()})
