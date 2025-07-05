@@ -1,0 +1,44 @@
+# Minimal Cloud Build to build and push trading bot
+steps:
+  # Step 1: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/trading-bot:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/trading-bot:latest'
+      - '.'
+    id: 'build-image'
+
+  # Step 2: Push image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/trading-bot:$BUILD_ID'
+    id: 'push-image'
+    waitFor: ['build-image']
+
+  # Step 3: Optional test (confirm container is OK)
+  - name: 'gcr.io/$PROJECT_ID/trading-bot:$BUILD_ID'
+    entrypoint: 'python'
+    args:
+      - '-c'
+      - |
+        import sys
+        print("✅ Python version:", sys.version)
+        import requests
+        print("✅ requests available")
+    id: 'test-container'
+    waitFor: ['push-image']
+
+images:
+  - 'gcr.io/$PROJECT_ID/trading-bot:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/trading-bot:latest'
+
+options:
+  machineType: 'E2_HIGHCPU_8'
+  logging: CLOUD_LOGGING_ONLY
+
+timeout: '1200s'
+

@@ -1,0 +1,122 @@
+{
+  "apiVersion": "serving.knative.dev/v1",
+  "kind": "Service",
+  "metadata": {
+    "annotations": {
+      "run.googleapis.com/client-name": "gcloud",
+      "run.googleapis.com/client-version": "528.0.0",
+      "run.googleapis.com/ingress": "all",
+      "run.googleapis.com/ingress-status": "all",
+      "run.googleapis.com/operation-id": "4b4b3a02-7b35-43f6-9c46-09d0e6b494ea",
+      "run.googleapis.com/urls": "[\"https://trading-bot-300379076659.us-central1.run.app\",\"https://trading-bot-r3y73gu4xq-uc.a.run.app\"]",
+      "serving.knative.dev/creator": "jagadish.pasham@gmail.com",
+      "serving.knative.dev/lastModifier": "jagadish.pasham@gmail.com"
+    },
+    "creationTimestamp": "2025-06-28T18:00:24.299398Z",
+    "generation": 16,
+    "labels": {
+      "cloud.googleapis.com/location": "us-central1"
+    },
+    "name": "trading-bot",
+    "namespace": "300379076659",
+    "resourceVersion": "AAY5Id3lxog",
+    "selfLink": "/apis/serving.knative.dev/v1/namespaces/300379076659/services/trading-bot",
+    "uid": "a86de056-e8ec-4aa0-8cd2-5afe44816483"
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "annotations": {
+          "autoscaling.knative.dev/maxScale": "10",
+          "run.googleapis.com/client-name": "gcloud",
+          "run.googleapis.com/client-version": "528.0.0",
+          "run.googleapis.com/startup-cpu-boost": "true"
+        },
+        "labels": {
+          "client.knative.dev/nonce": "hddjebthgz",
+          "run.googleapis.com/startupProbeType": "Default"
+        }
+      },
+      "spec": {
+        "containerConcurrency": 80,
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "ENVIRONMENT",
+                "value": "production"
+              }
+            ],
+            "image": "gcr.io/tradingbotproject-464317/trading-bot:e76099d1-f0e1-4502-aff6-6d8f0820b6a0",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "1Gi"
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 1,
+              "periodSeconds": 240,
+              "tcpSocket": {
+                "port": 8080
+              },
+              "timeoutSeconds": 240
+            }
+          }
+        ],
+        "serviceAccountName": "300379076659-compute@developer.gserviceaccount.com",
+        "timeoutSeconds": 300
+      }
+    },
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100
+      }
+    ]
+  },
+  "status": {
+    "address": {
+      "url": "https://trading-bot-r3y73gu4xq-uc.a.run.app"
+    },
+    "conditions": [
+      {
+        "lastTransitionTime": "2025-07-04T20:22:25.096848Z",
+        "message": "Revision 'trading-bot-00016-rbs' is not ready and cannot serve traffic. The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=tradingbotproject-464317&resource=cloud_run_revision/service_name/trading-bot/revision_name/trading-bot-00016-rbs&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22trading-bot%22%0Aresource.labels.revision_name%3D%22trading-bot-00016-rbs%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2025-07-04T22:14:06.092754Z",
+        "message": "The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=tradingbotproject-464317&resource=cloud_run_revision/service_name/trading-bot/revision_name/trading-bot-00014-w5t&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22trading-bot%22%0Aresource.labels.revision_name%3D%22trading-bot-00014-w5t%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "status": "True",
+        "type": "ConfigurationsReady"
+      },
+      {
+        "lastTransitionTime": "2025-07-04T20:22:25.096848Z",
+        "message": "Revision 'trading-bot-00016-rbs' is not ready and cannot serve traffic. The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.\n\nLogs URL: https://console.cloud.google.com/logs/viewer?project=tradingbotproject-464317&resource=cloud_run_revision/service_name/trading-bot/revision_name/trading-bot-00016-rbs&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22trading-bot%22%0Aresource.labels.revision_name%3D%22trading-bot-00016-rbs%22 \nFor more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start",
+        "reason": "HealthCheckContainerError",
+        "status": "False",
+        "type": "RoutesReady"
+      }
+    ],
+    "latestCreatedRevisionName": "trading-bot-00016-rbs",
+    "latestReadyRevisionName": "trading-bot-00011-gvw",
+    "observedGeneration": 16,
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "revisionName": "trading-bot-00011-gvw"
+      }
+    ],
+    "url": "https://trading-bot-r3y73gu4xq-uc.a.run.app"
+  }
+}

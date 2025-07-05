@@ -1,0 +1,8 @@
+name: projects/tradingbotproject-464317/locations/us-central1/jobs/trading-bot-scheduler
+schedule: "*/5 9-16 * * 1-5"
+timeZone: "America/New_York"
+httpTarget:
+  uri: https://trading-bot-r3y73gu4xq-uc.a.run.app?force=true
+  httpMethod: GET
+  oidcToken:
+    serviceAccountEmail: tradingbotproject-464317@appspot.gserviceaccount.com
