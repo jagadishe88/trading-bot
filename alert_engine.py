@@ -1,435 +1,288 @@
-# Complete Live Options Monitoring System
-import data_feed
+# Complete Alert Engine with Performance Tracking and Alert Generation
 import json
-import requests
-import sys
-import math
-import threading
-import time
+import os
 from datetime import datetime, timedelta
-from telegram_alert import send_telegram_alert
+from collections import defaultdict
+import numpy as np
+import pandas as pd
 
-
-class LiveOptionsMonitor:
+class TradingPerformanceTracker:
     def __init__(self):
-        self.active_trades = {}  # Store all live trades
-        self.monitoring = True
-        self.check_interval = 30  # Check every 30 seconds
-        
-        self.trade_configs = {
-            'scalp': {
-                'rr_min': 1.2, 'rr_max': 1.3,
-                'max_duration_hours': 6.5,
-                'rvol_threshold': 150,
-                'duration_text': 'Same day before 3:55 PM'
-            },
-            'day': {
-                'rr_min': 2.0, 'rr_max': 3.0,
-                'max_duration_days': 2,
-                'rvol_threshold': 130,
-                'duration_text': '1-2 days maximum'
-            },
-            'swing': {
-                'rr_min': 3.0, 'rr_max': 5.0,
-                'max_duration_weeks': 6,
-                'min_duration_weeks': 2,
-                'rvol_threshold': 120,
-                'duration_text': '2-6 weeks maximum'
+        self.performance_file = "data/trading_performance.json"
+        self.trades_history = []
+        self.daily_stats = defaultdict(dict)
+        self.load_performance_data()
+    
+    def load_performance_data(self):
+        """Load existing performance data"""
+        try:
+            if os.path.exists(self.performance_file):
+                with open(self.performance_file, 'r') as f:
+                    data = json.load(f)
+                    self.trades_history = data.get('trades', [])
+                    self.daily_stats = defaultdict(dict, data.get('daily_stats', {}))
+        except Exception as e:
+            print(f"Error loading performance data: {e}")
+    
+    def save_performance_data(self):
+        """Save performance data to file"""
+        try:
+            os.makedirs(os.path.dirname(self.performance_file), exist_ok=True)
+            data = {
+                'trades': self.trades_history,
+                'daily_stats': dict(self.daily_stats),
+                'last_updated': datetime.now().isoformat()
             }
-        }
-
-    def create_live_trade(self, symbol, trade_style, confluence_data, estimated_entry):
-        """Create a live trade for monitoring"""
-        trade_id = f"{symbol}_{trade_style}_{datetime.now().strftime('%Y%m%d_%H%M')}"
-        
-        trade = {
-            'trade_id': trade_id,
-            'symbol': symbol,
-            'trade_style': trade_style,
-            'status': 'SETUP_READY',  # SETUP_READY -> ENTERED -> MONITORING -> EXITED
-            'created_time': datetime.now(),
-            'entry_time': None,
-            'exit_time': None,
-            
-            # Entry Data
-            'estimated_entry_cost': estimated_entry,
-            'actual_entry_cost': None,
-            'strike_price': self.calculate_atm_strike(confluence_data['current_price']),
-            'expiration_date': self.get_expiration_date(trade_style),
-            'contracts': 1,  # Default 1 contract
-            
-            # Exit Levels (will be calculated when trade is entered)
-            'stop_loss_price': None,
-            'target_price': None,
-            'technical_stop_levels': confluence_data.get('support_levels', []),
-            
-            # Entry Confluence (for monitoring breakdown)
-            'entry_confluences': confluence_data,
-            'entry_support_levels': confluence_data.get('support_levels', []),
-            'entry_ema_state': confluence_data.get('ema_state', {}),
-            'entry_mtf_clouds': confluence_data.get('mtf_clouds', {}),
-            
-            # Monitoring Flags
-            'profit_target_hit': False,
-            'technical_invalidated': False,
-            'time_limit_reached': False,
-            'stop_loss_hit': False,
-            
-            # Performance Tracking
-            'current_option_price': None,
-            'current_pnl': 0.0,
-            'current_pnl_percent': 0.0,
-            'max_profit': 0.0,
-            'max_drawdown': 0.0,
+            with open(self.performance_file, 'w') as f:
+                json.dump(data, f, indent=2)
+        except Exception as e:
+            print(f"Error saving performance data: {e}")
+    
+    def record_trade_setup(self, trade_data):
+        """Record when a trade setup is detected"""
+        setup_record = {
+            'setup_id': f"{trade_data['symbol']}_{trade_data['trade_style']}_{datetime.now().strftime('%Y%m%d_%H%M')}",
+            'symbol': trade_data['symbol'],
+            'trade_style': trade_data['trade_style'],
+            'setup_time': datetime.now().isoformat(),
+            'estimated_entry': trade_data.get('estimated_entry_cost'),
+            'confluence_score': self.calculate_confluence_score(trade_data),
+            'market_conditions': self.get_market_conditions(),
+            'status': 'SETUP_DETECTED'
         }
         
-        self.active_trades[trade_id] = trade
-        print(f"📝 Created live trade setup: {trade_id}")
-        return trade_id
-
-    def enter_trade_with_real_price(self, trade_id, actual_option_price):
-        """Update trade with real market entry price"""
-        if trade_id not in self.active_trades:
-            return False
-        
-        trade = self.active_trades[trade_id]
-        trade['actual_entry_cost'] = actual_option_price
-        trade['entry_time'] = datetime.now()
-        trade['status'] = 'ENTERED'
-        
-        # Calculate dynamic exit levels based on REAL entry price
-        trade['stop_loss_price'] = actual_option_price * 0.50  # 50% rule
-        
-        config = self.trade_configs[trade['trade_style']]
-        target_multiplier = config['rr_min']
-        risk = actual_option_price - trade['stop_loss_price']
-        reward = risk * target_multiplier
-        trade['target_price'] = actual_option_price + reward
-        
-        # Send entry confirmation
-        self.send_entry_confirmation(trade)
-        
-        # Start monitoring
-        trade['status'] = 'MONITORING'
-        print(f"✅ Trade entered: {trade_id} at ${actual_option_price:.2f}")
-        return True
-
-    def monitor_all_trades(self):
-        """Main monitoring loop - runs continuously"""
-        while self.monitoring:
-            try:
-                current_time = datetime.now()
+        self.trades_history.append(setup_record)
+        self.save_performance_data()
+        return setup_record['setup_id']
+    
+    def record_trade_entry(self, setup_id, actual_entry_price):
+        """Record when a trade is actually entered"""
+        for trade in self.trades_history:
+            if trade.get('setup_id') == setup_id:
+                trade.update({
+                    'entry_time': datetime.now().isoformat(),
+                    'actual_entry': actual_entry_price,
+                    'status': 'ENTERED',
+                    'slippage': actual_entry_price - trade.get('estimated_entry', actual_entry_price)
+                })
+                break
+        self.save_performance_data()
+    
+    def record_trade_exit(self, setup_id, exit_price, exit_reason):
+        """Record when a trade is exited"""
+        for trade in self.trades_history:
+            if trade.get('setup_id') == setup_id:
+                entry_price = trade.get('actual_entry', trade.get('estimated_entry', 0))
+                pnl = exit_price - entry_price if entry_price > 0 else 0
+                pnl_percent = (pnl / entry_price * 100) if entry_price > 0 else 0
                 
-                for trade_id, trade in list(self.active_trades.items()):
-                    if trade['status'] == 'MONITORING':
-                        self.check_trade_conditions(trade_id, current_time)
+                trade.update({
+                    'exit_time': datetime.now().isoformat(),
+                    'exit_price': exit_price,
+                    'exit_reason': exit_reason,
+                    'pnl': pnl,
+                    'pnl_percent': pnl_percent,
+                    'status': 'CLOSED',
+                    'trade_duration': self.calculate_duration(
+                        trade.get('entry_time', trade.get('setup_time')),
+                        datetime.now().isoformat()
+                    )
+                })
                 
-                time.sleep(self.check_interval)
-                
-            except Exception as e:
-                print(f"❌ Error in monitoring loop: {e}")
-                time.sleep(5)
-
-    def check_trade_conditions(self, trade_id, current_time):
-        """Check all 4 exit conditions for a trade"""
-        trade = self.active_trades[trade_id]
-        symbol = trade['symbol']
+                # Update daily statistics
+                self.update_daily_stats(trade)
+                break
         
+        self.save_performance_data()
+    
+    def calculate_confluence_score(self, trade_data):
+        """Calculate confluence score for trade quality"""
+        score = 0
+        
+        confluences = trade_data.get('entry_confluences', {})
+        
+        # EMA alignment
+        trends = confluences.get('trends', {})
+        if trends.get('9_21') == 'Bullish':
+            score += 20
+        if trends.get('34_50') == 'Bullish':
+            score += 15
+        
+        # Volume
+        rvol = confluences.get('rvol', 1.0)
+        if rvol > 1.5:
+            score += 25
+        elif rvol > 1.3:
+            score += 15
+        elif rvol > 1.1:
+            score += 5
+        
+        # Multi-timeframe
+        mtf_clouds = trends.get('mtf_clouds', {})
+        bullish_tf_count = sum(1 for v in mtf_clouds.values() if v == 'Bullish')
+        score += bullish_tf_count * 10
+        
+        # Support levels
+        support_levels = confluences.get('support_levels', [])
+        score += len(support_levels) * 5
+        
+        return min(score, 100)  # Cap at 100
+    
+    def get_market_conditions(self):
+        """Get current market conditions snapshot"""
+        return {
+            'timestamp': datetime.now().isoformat(),
+            'market_open': True,  # You can integrate with your market hours check
+            'vix_level': 'Normal',  # Integrate with VIX data if available
+            'market_trend': 'Bullish'  # Integrate with market trend analysis
+        }
+    
+    def calculate_duration(self, start_time, end_time):
+        """Calculate trade duration in minutes"""
         try:
-            # Get current market data
-            current_stock_price = self.get_current_stock_price(symbol)
-            current_option_price = self.get_current_option_price(trade)
-            
-            if current_option_price is None:
-                return
-            
-            # Update trade performance
-            self.update_trade_performance(trade, current_option_price)
-            
-            # Check all exit conditions
-            exit_triggered = False
-            exit_reason = ""
-            
-            # 1. TECHNICAL BREAKDOWN (Priority #1)
-            technical_breakdown = self.check_technical_breakdown(trade, current_stock_price)
-            if technical_breakdown:
-                exit_triggered = True
-                exit_reason = f"TECHNICAL BREAKDOWN: {technical_breakdown}"
-                trade['technical_invalidated'] = True
-            
-            # 2. PROFIT TARGETS (Priority #2)
-            elif current_option_price >= trade['target_price']:
-                exit_triggered = True
-                exit_reason = f"PROFIT TARGET HIT: ${current_option_price:.2f} >= ${trade['target_price']:.2f}"
-                trade['profit_target_hit'] = True
-            
-            # 3. TIME-BASED LIMITS (Priority #3)
-            elif self.check_time_limits(trade, current_time):
-                exit_triggered = True
-                exit_reason = "TIME LIMIT REACHED"
-                trade['time_limit_reached'] = True
-            
-            # 4. STOP LOSS (Priority #4 - Last Resort)
-            elif current_option_price <= trade['stop_loss_price']:
-                exit_triggered = True
-                exit_reason = f"STOP LOSS HIT: ${current_option_price:.2f} <= ${trade['stop_loss_price']:.2f}"
-                trade['stop_loss_hit'] = True
-            
-            # Execute exit if any condition triggered
-            if exit_triggered:
-                self.execute_exit(trade_id, current_option_price, exit_reason)
-            
-            # Send periodic updates (every 5 minutes)
-            elif current_time.minute % 5 == 0 and current_time.second < 30:
-                self.send_periodic_update(trade)
-                
-        except Exception as e:
-            print(f"❌ Error checking trade {trade_id}: {e}")
-
-    def check_technical_breakdown(self, trade, current_stock_price):
-        """Check for technical confluence breakdown"""
-        symbol = trade['symbol']
-        
-        try:
-            # Get current technical data
-            current_trends = data_feed.get_trend_data(symbol)
-            current_ma_data = data_feed.get_moving_averages(symbol, [9, 21, 34, 50, 200])
-            current_pivots = data_feed.get_pivots(symbol)
-            
-            # Check EMA cloud breakdown
-            entry_9_21 = trade['entry_confluences']['trends'].get('9_21', 'Neutral')
-            current_9_21 = current_trends.get('9_21', 'Neutral')
-            
-            if entry_9_21 == 'Bullish' and current_9_21 != 'Bullish':
-                return "9/21 EMA cloud turned bearish"
-            
-            entry_34_50 = trade['entry_confluences']['trends'].get('34_50', 'Neutral')
-            current_34_50 = current_trends.get('34_50', 'Neutral')
-            
-            if entry_34_50 == 'Bullish' and current_34_50 != 'Bullish':
-                return "34/50 EMA cloud turned bearish"
-            
-            # Check support level breaks
-            for support_level in trade['entry_support_levels']:
-                level_price = support_level.get('level')
-                level_name = support_level.get('name')
-                
-                if level_price and current_stock_price < level_price * 0.995:  # 0.5% buffer
-                    return f"{level_name} support broken (${level_price:.2f})"
-            
-            # Check 50 EMA breakdown (major support)
-            if current_stock_price < current_ma_data.get(50, 0) * 0.998:
-                return "50 EMA support broken"
-            
-            # Check multi-timeframe deterioration
-            mtf_clouds = current_trends.get('mtf_clouds', {})
-            if len([c for c in mtf_clouds.values() if c == 'Bearish']) >= 2:
-                return "Multi-timeframe turned bearish"
-            
-            return None  # No breakdown detected
-            
-        except Exception as e:
-            print(f"Error checking technical breakdown: {e}")
-            return None
-
-    def check_time_limits(self, trade, current_time):
-        """Check time-based exit conditions"""
-        entry_time = trade.get('entry_time')
-        if not entry_time:
-            return False
-        
-        config = self.trade_configs[trade['trade_style']]
-        
-        if trade['trade_style'] == 'scalp':
-            # Same day exit before 3:55 PM
-            market_close = entry_time.replace(hour=15, minute=55, second=0)
-            return current_time >= market_close
-            
-        elif trade['trade_style'] == 'day':
-            # 1-2 days maximum
-            max_time = entry_time + timedelta(days=config['max_duration_days'])
-            return current_time >= max_time
-            
-        elif trade['trade_style'] == 'swing':
-            # 2-6 weeks maximum
-            max_time = entry_time + timedelta(weeks=config['max_duration_weeks'])
-            return current_time >= max_time
-        
-        return False
-
-    def update_trade_performance(self, trade, current_option_price):
-        """Update trade P&L and performance metrics"""
-        if not trade['actual_entry_cost']:
-            return
-        
-        trade['current_option_price'] = current_option_price
-        
-        # Calculate P&L
-        pnl = current_option_price - trade['actual_entry_cost']
-        pnl_percent = (pnl / trade['actual_entry_cost']) * 100
-        
-        trade['current_pnl'] = pnl
-        trade['current_pnl_percent'] = pnl_percent
-        
-        # Track max profit and drawdown
-        if pnl > trade['max_profit']:
-            trade['max_profit'] = pnl
-        
-        drawdown = trade['max_profit'] - pnl
-        if drawdown > trade['max_drawdown']:
-            trade['max_drawdown'] = drawdown
-
-    def execute_exit(self, trade_id, exit_price, exit_reason):
-        """Execute trade exit and send notification"""
-        trade = self.active_trades[trade_id]
-        trade['status'] = 'EXITED'
-        trade['exit_time'] = datetime.now()
-        trade['exit_price'] = exit_price
-        trade['exit_reason'] = exit_reason
-        
-        # Calculate final P&L
-        final_pnl = exit_price - trade['actual_entry_cost']
-        final_pnl_percent = (final_pnl / trade['actual_entry_cost']) * 100
-        
-        # Send exit alert - Fixed Telegram formatting
-        exit_alert = f"""🚨 *TRADE EXIT EXECUTED*
-
-📊 *{trade['symbol']} {trade['trade_style'].upper()}* 
-🎫 ${trade['strike_price']} CALL {trade['expiration_date']}
-
-💰 *PERFORMANCE:*
-• Entry: ${trade['actual_entry_cost']:.2f}
-• Exit: ${exit_price:.2f}
-• P&L: ${final_pnl:.2f} ({final_pnl_percent:+.1f}%)
-• Max Profit: ${trade['max_profit']:.2f}
-• Max Drawdown: ${trade['max_drawdown']:.2f}
-
-🚨 *EXIT REASON:* {exit_reason}
-
-⏰ *TRADE DURATION:* {self.calculate_trade_duration(trade)}
-
-#{trade['symbol']} #EXIT #{trade['trade_style'].upper()}"""
-
-        self.send_telegram_alert(exit_alert)
-        print(f"🚪 Trade exited: {trade_id} - {exit_reason}")
-
-    def send_entry_confirmation(self, trade):
-        """Send confirmation when trade is entered with real price"""
-        config = self.trade_configs[trade['trade_style']]
-        
-        alert = f"""✅ *TRADE ENTERED - LIVE MONITORING STARTED*
-
-📊 *{trade['symbol']} {trade['trade_style'].upper()}*
-🎫 ${trade['strike_price']} CALL exp {trade['expiration_date']}
-
-💰 *REAL ENTRY PRICE:* ${trade['actual_entry_cost']:.2f}
-🎯 *Target:* ${trade['target_price']:.2f} ({((trade['target_price']/trade['actual_entry_cost']-1)*100):.0f}% gain)
-🛡️ *Stop:* ${trade['stop_loss_price']:.2f} (50% rule)
-⏰ *Max Hold:* {config['duration_text']}
-
-🤖 *LIVE MONITORING ACTIVE:*
-✅ Technical breakdown detection
-✅ Profit target monitoring  
-✅ Time limit tracking
-✅ Stop loss protection
-
-You will receive automatic exit alerts when any condition triggers.
-
-#{trade['symbol']} #ENTERED #{trade['trade_style'].upper()}"""
-
-        self.send_telegram_alert(alert)
-
-    def send_periodic_update(self, trade):
-        """Send periodic P&L updates"""
-        if not trade['current_option_price']:
-            return
-        
-        update = f"""📊 *TRADE UPDATE*
-
-{trade['symbol']} {trade['trade_style'].upper()}
-Current: ${trade['current_option_price']:.2f}
-P&L: ${trade['current_pnl']:.2f} ({trade['current_pnl_percent']:+.1f}%)
-Target: ${trade['target_price']:.2f}
-Stop: ${trade['stop_loss_price']:.2f}
-
-#{trade['symbol']} #UPDATE"""
-
-        self.send_telegram_alert(update)
-
-    # Helper methods
-    def get_current_stock_price(self, symbol):
-        try:
-            options_data = data_feed.fetch_option_chain(symbol)
-            return options_data['ask_price']
+            start = datetime.fromisoformat(start_time.replace('Z', '+00:00'))
+            end = datetime.fromisoformat(end_time.replace('Z', '+00:00'))
+            duration = end - start
+            return duration.total_seconds() / 60  # Return minutes
         except:
-            return None
-
-    def get_current_option_price(self, trade):
-        # In real implementation, you'd fetch actual option price from broker/data feed
-        # For now, estimate based on stock movement
-        try:
-            current_stock = self.get_current_stock_price(trade['symbol'])
-            if not current_stock:
-                return None
-            
-            # Simple estimation - replace with real option pricing
-            stock_change_pct = (current_stock - trade['entry_confluences']['current_price']) / trade['entry_confluences']['current_price']
-            leverage = {'scalp': 15, 'day': 20, 'swing': 30}[trade['trade_style']]
-            option_change_pct = stock_change_pct * leverage
-            
-            estimated_price = trade['actual_entry_cost'] * (1 + option_change_pct)
-            return max(0.01, estimated_price)  # Options can't go below $0.01
-            
-        except:
-            return None
-
-    def calculate_atm_strike(self, current_price):
-        return round(current_price)
-
-    def get_expiration_date(self, trade_style):
-        # Simplified - use your existing expiration logic
-        if trade_style == 'scalp':
-            return (datetime.now() + timedelta(days=1)).strftime("%m/%d/%y")
-        elif trade_style == 'day':
-            return (datetime.now() + timedelta(days=3)).strftime("%m/%d/%y")
-        else:
-            return (datetime.now() + timedelta(days=14)).strftime("%m/%d/%y")
-
-    def calculate_trade_duration(self, trade):
-        if trade['entry_time'] and trade['exit_time']:
-            duration = trade['exit_time'] - trade['entry_time']
-            return str(duration).split('.')[0]  # Remove microseconds
-        return "Unknown"
-
-    def send_telegram_alert(self, message):
-        # Use your existing Telegram function
-        send_telegram_alert(message)
-
-# Integration with your existing system
-def start_live_monitoring():
-    """Start the live monitoring system"""
-    monitor = LiveOptionsMonitor()
+            return 0
     
-    # Start monitoring in background thread
-    monitoring_thread = threading.Thread(target=monitor.monitor_all_trades, daemon=True)
-    monitoring_thread.start()
+    def update_daily_stats(self, trade):
+        """Update daily performance statistics"""
+        trade_date = datetime.fromisoformat(trade.get('entry_time', trade.get('setup_time'))).date().isoformat()
+        
+        if trade_date not in self.daily_stats:
+            self.daily_stats[trade_date] = {
+                'trades_count': 0,
+                'wins': 0,
+                'losses': 0,
+                'total_pnl': 0,
+                'total_pnl_percent': 0,
+                'avg_confluence_score': 0,
+                'trade_styles': defaultdict(int)
+            }
+        
+        daily = self.daily_stats[trade_date]
+        daily['trades_count'] += 1
+        
+        pnl = trade.get('pnl', 0)
+        if pnl > 0:
+            daily['wins'] += 1
+        elif pnl < 0:
+            daily['losses'] += 1
+        
+        daily['total_pnl'] += pnl
+        daily['total_pnl_percent'] += trade.get('pnl_percent', 0)
+        
+        # Update confluence score average
+        confluence_score = trade.get('confluence_score', 0)
+        daily['avg_confluence_score'] = (
+            (daily['avg_confluence_score'] * (daily['trades_count'] - 1) + confluence_score) 
+            / daily['trades_count']
+        )
+        
+        # Track trade styles
+        trade_style = trade.get('trade_style', 'unknown')
+        daily['trade_styles'][trade_style] += 1
     
-    print("🤖 Live Options Monitoring System STARTED")
-    print("📊 Monitoring all active trades for exit conditions")
-    print("⚡ Real-time alerts for technical breakdown, profit targets, time limits, and stop losses")
+    def get_performance_summary(self, days=30):
+        """Get performance summary for last N days"""
+        cutoff_date = (datetime.now() - timedelta(days=days)).date()
+        
+        recent_trades = [
+            t for t in self.trades_history 
+            if (t.get('status') == 'CLOSED' and 
+                datetime.fromisoformat(t.get('entry_time', t.get('setup_time'))).date() >= cutoff_date)
+        ]
+        
+        if not recent_trades:
+            return {"error": "No completed trades in the specified period"}
+        
+        total_trades = len(recent_trades)
+        wins = sum(1 for t in recent_trades if t.get('pnl', 0) > 0)
+        losses = sum(1 for t in recent_trades if t.get('pnl', 0) < 0)
+        
+        total_pnl = sum(t.get('pnl', 0) for t in recent_trades)
+        total_pnl_percent = sum(t.get('pnl_percent', 0) for t in recent_trades)
+        
+        avg_confluence = np.mean([t.get('confluence_score', 0) for t in recent_trades])
+        
+        # Trade style breakdown
+        style_performance = defaultdict(lambda: {'count': 0, 'pnl': 0, 'wins': 0})
+        for trade in recent_trades:
+            style = trade.get('trade_style', 'unknown')
+            style_performance[style]['count'] += 1
+            style_performance[style]['pnl'] += trade.get('pnl', 0)
+            if trade.get('pnl', 0) > 0:
+                style_performance[style]['wins'] += 1
+        
+        return {
+            'period_days': days,
+            'total_trades': total_trades,
+            'wins': wins,
+            'losses': losses,
+            'win_rate': (wins / total_trades * 100) if total_trades > 0 else 0,
+            'total_pnl': round(total_pnl, 2),
+            'avg_pnl_per_trade': round(total_pnl / total_trades, 2) if total_trades > 0 else 0,
+            'total_pnl_percent': round(total_pnl_percent, 1),
+            'avg_pnl_percent': round(total_pnl_percent / total_trades, 1) if total_trades > 0 else 0,
+            'avg_confluence_score': round(avg_confluence, 1),
+            'style_breakdown': dict(style_performance),
+            'best_trade': max(recent_trades, key=lambda x: x.get('pnl', 0)) if recent_trades else None,
+            'worst_trade': min(recent_trades, key=lambda x: x.get('pnl', 0)) if recent_trades else None
+        }
     
-    return monitor
+    def generate_performance_report(self):
+        """Generate a comprehensive performance report"""
+        weekly_summary = self.get_performance_summary(7)
+        monthly_summary = self.get_performance_summary(30)
+        
+        report = f"""📊 **TRADING PERFORMANCE REPORT**
 
-# ADDED: The missing generate_alert_improved function that main.py needs
+🗓️ **7-DAY SUMMARY:**
+• Total Trades: {weekly_summary.get('total_trades', 0)}
+• Win Rate: {weekly_summary.get('win_rate', 0):.1f}%
+• Total P&L: ${weekly_summary.get('total_pnl', 0):.2f}
+• Avg P&L per Trade: ${weekly_summary.get('avg_pnl_per_trade', 0):.2f}
+• Avg Confluence Score: {weekly_summary.get('avg_confluence_score', 0):.1f}/100
+
+📅 **30-DAY SUMMARY:**
+• Total Trades: {monthly_summary.get('total_trades', 0)}
+• Win Rate: {monthly_summary.get('win_rate', 0):.1f}%
+• Total P&L: ${monthly_summary.get('total_pnl', 0):.2f}
+• Avg P&L per Trade: ${monthly_summary.get('avg_pnl_per_trade', 0):.2f}
+• Total P&L %: {monthly_summary.get('total_pnl_percent', 0):.1f}%
+
+🎯 **TRADE STYLE BREAKDOWN (30d):**"""
+        
+        style_breakdown = monthly_summary.get('style_breakdown', {})
+        for style, data in style_breakdown.items():
+            win_rate = (data['wins'] / data['count'] * 100) if data['count'] > 0 else 0
+            report += f"\n• {style.title()}: {data['count']} trades, {win_rate:.1f}% win rate, ${data['pnl']:.2f} P&L"
+        
+        best_trade = monthly_summary.get('best_trade')
+        if best_trade:
+            report += f"\n\n🏆 **BEST TRADE (30d):**\n• {best_trade['symbol']} {best_trade['trade_style']}: +${best_trade['pnl']:.2f} ({best_trade['pnl_percent']:+.1f}%)"
+        
+        return report
+
+# Global performance tracker instance
+performance_tracker = TradingPerformanceTracker()
+
+# ===== ALERT GENERATION FUNCTIONS =====
+
 def generate_alert_improved(symbol, trade_type):
     """
-    Generate trading alerts - integrates with your existing live monitoring system
-    This function is called by main.py for each symbol and trade type
+    Generate trading alerts - main function called by main.py
+    This function analyzes symbols and sends alerts when setups are detected
     """
     try:
         print(f"🔍 Analyzing {symbol} for {trade_type} strategy")
         
         # Get market data using your data_feed
+        import data_feed
+        from telegram_alert import send_telegram_alert
+        
         quote_data = data_feed.fetch_option_chain(symbol)
         if not quote_data:
             print(f"❌ No data available for {symbol}")
@@ -443,7 +296,7 @@ def generate_alert_improved(symbol, trade_type):
         trend_data = data_feed.get_trend_data(symbol)
         pivots = data_feed.get_pivots(symbol)
         
-        # Create confluence data structure for your live monitoring system
+        # Create confluence data structure
         confluence_data = {
             'current_price': current_price,
             'trends': trend_data,
@@ -457,7 +310,7 @@ def generate_alert_improved(symbol, trade_type):
             ]
         }
         
-        # Get the threshold for this trade type from your sophisticated config
+        # Get the threshold for this trade type
         trade_config = {
             'scalp': {'rvol_threshold': 150},
             'day': {'rvol_threshold': 130}, 
@@ -467,7 +320,7 @@ def generate_alert_improved(symbol, trade_type):
         config = trade_config.get(trade_type, {'rvol_threshold': 130})
         rvol_threshold = config['rvol_threshold'] / 100  # Convert to decimal
         
-        # Alert conditions based on your sophisticated logic
+        # Alert conditions based on sophisticated logic
         alert_triggered = False
         alert_reason = ""
         
@@ -496,22 +349,22 @@ def generate_alert_improved(symbol, trade_type):
             alert_reason = f"Multi-timeframe bullish alignment with elevated volume"
         
         if alert_triggered:
-            # Use your sophisticated live monitoring system
-            live_monitor = LiveOptionsMonitor()
-            
             # Estimate option entry cost based on your logic
             estimated_entry = current_price * 0.03  # Rough 3% of stock price for ATM options
             
-            # Create live trade setup using your existing system
-            trade_id = live_monitor.create_live_trade(
-                symbol, 
-                trade_type, 
-                confluence_data, 
-                estimated_entry
-            )
+            # Create trade data for performance tracking
+            trade_data = {
+                'symbol': symbol,
+                'trade_style': trade_type,
+                'estimated_entry_cost': estimated_entry,
+                'entry_confluences': confluence_data
+            }
             
-            # Send sophisticated setup alert - Fixed Telegram formatting
-            setup_alert = f"""🚨 *{trade_type.upper()} SETUP DETECTED*
+            # Track setup detection
+            setup_id = performance_tracker.record_trade_setup(trade_data)
+            
+            # Send sophisticated setup alert
+            setup_alert = f"""🚨 **{trade_type.upper()} SETUP DETECTED**
 
 *{symbol}* - ${current_price:.2f}
 *Reason:* {alert_reason}
@@ -530,10 +383,7 @@ def generate_alert_improved(symbol, trade_type):
 *Estimated Entry:* ~${estimated_entry:.2f}
 *Trade Style:* {trade_type.capitalize()}
 
-*LIVE MONITORING READY*
-Trade ID: {trade_id}
-
-Use your live monitoring system to enter this trade with real pricing!
+*Setup ID:* {setup_id}
 
 #{symbol} #SETUP #{trade_type.upper()}"""
             
@@ -550,11 +400,35 @@ Use your live monitoring system to enter this trade with real pricing!
             
     except Exception as e:
         print(f"❌ Error in generate_alert_improved for {symbol}: {e}")
+        import traceback
+        print(f"❌ Traceback: {traceback.format_exc()}")
 
-# Usage example
+# Performance tracking helper functions
+def track_setup_detected(trade_data):
+    """Helper function to track setup detection"""
+    return performance_tracker.record_trade_setup(trade_data)
+
+def track_trade_entered(setup_id, actual_price):
+    """Helper function to track trade entry"""
+    return performance_tracker.record_trade_entry(setup_id, actual_price)
+
+def track_trade_exited(setup_id, exit_price, reason):
+    """Helper function to track trade exit"""
+    return performance_tracker.record_trade_exit(setup_id, exit_price, reason)
+
+def get_daily_performance_report():
+    """Get daily performance report for Telegram"""
+    return performance_tracker.generate_performance_report()
+
+# Usage example and testing
 if __name__ == "__main__":
-    # Start live monitoring system
-    live_monitor = start_live_monitoring()
+    print("🧪 Testing Alert Engine...")
     
-    # Your existing alert generation would now create monitored trades
-    # instead of just sending setup alerts
+    # Test alert generation for a few symbols
+    test_symbols = ["AAPL", "QQQ", "SPY"]
+    test_strategies = ["scalp", "day", "swing"]
+    
+    for symbol in test_symbols:
+        for strategy in test_strategies:
+            print(f"\n--- Testing {symbol} {strategy} ---")
+            generate_alert_improved(symbol, strategy)

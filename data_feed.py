@@ -1,5 +1,4 @@
-# Schwab API Data Feed - Complete Implementation with Enhanced Debugging
-
+# Updated data_feed.py - Replace your existing file with this
 import requests
 import json
 import base64
@@ -12,22 +11,132 @@ import os
 import logging
 from utils import get_secret
 
+# Add Google Secret Manager imports
+try:
+    from google.cloud import secretmanager
+    SECRET_MANAGER_AVAILABLE = True
+except ImportError:
+    SECRET_MANAGER_AVAILABLE = False
+    print("⚠️ Google Cloud Secret Manager not available - using file fallback")
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+class CloudSecretManager:
+    def __init__(self):
+        self.project_id = os.getenv('GOOGLE_CLOUD_PROJECT', 'tradingbotproject-464317')
+        self.enabled = False
+        
+        if SECRET_MANAGER_AVAILABLE:
+            try:
+                self.client = secretmanager.SecretManagerServiceClient()
+                self.enabled = True
+                logger.info("✅ Google Secret Manager initialized")
+            except Exception as e:
+                logger.warning(f"⚠️ Secret Manager not available: {e}")
+                self.enabled = False
+        else:
+            logger.info("📦 Secret Manager library not installed, using file fallback")
+    
+    def save_schwab_token(self, token_data):
+        """Save Schwab token to Secret Manager or file"""
+        if not self.enabled:
+            return self._save_to_file(token_data)
+        
+        try:
+            secret_name = f"projects/{self.project_id}/secrets/schwab-token"
+            
+            # Check if secret exists, create if not
+            try:
+                self.client.get_secret(name=secret_name)
+                logger.info("📝 Using existing schwab-token secret")
+            except Exception:
+                # Create the secret
+                try:
+                    parent = f"projects/{self.project_id}"
+                    self.client.create_secret(
+                        parent=parent, 
+                        secret_id="schwab-token", 
+                        secret={}
+                    )
+                    logger.info("🆕 Created new schwab-token secret")
+                except Exception as create_error:
+                    logger.error(f"❌ Could not create secret: {create_error}")
+                    return self._save_to_file(token_data)
+            
+            # Add new version
+            payload = json.dumps(token_data).encode('utf-8')
+            response = self.client.add_secret_version(
+                parent=secret_name,
+                payload={'data': payload}
+            )
+            
+            logger.info(f"✅ Schwab token saved to Secret Manager")
+            return True
+            
+        except Exception as e:
+            logger.error(f"❌ Error saving token to Secret Manager: {e}")
+            return self._save_to_file(token_data)
+    
+    def load_schwab_token(self):
+        """Load Schwab token from Secret Manager or file"""
+        if not self.enabled:
+            return self._load_from_file()
+        
+        try:
+            secret_name = f"projects/{self.project_id}/secrets/schwab-token/versions/latest"
+            
+            response = self.client.access_secret_version(name=secret_name)
+            secret_data = response.payload.data.decode('utf-8')
+            token_data = json.loads(secret_data)
+            
+            logger.info("✅ Schwab token loaded from Secret Manager")
+            return token_data
+            
+        except Exception as e:
+            logger.warning(f"⚠️ Could not load from Secret Manager: {e}")
+            return self._load_from_file()
+    
+    def _save_to_file(self, token_data):
+        """Fallback: save to local file"""
+        try:
+            os.makedirs("data", exist_ok=True)
+            with open("data/schwab_token.json", 'w') as f:
+                json.dump(token_data, f)
+            logger.info("📁 Token saved to local file")
+            return True
+        except Exception as e:
+            logger.error(f"❌ Error saving to file: {e}")
+            return False
+    
+    def _load_from_file(self):
+        """Fallback: load from local file"""
+        try:
+            if os.path.exists("data/schwab_token.json"):
+                with open("data/schwab_token.json", 'r') as f:
+                    token_data = json.load(f)
+                logger.info("📁 Token loaded from local file")
+                return token_data
+        except Exception as e:
+            logger.error(f"❌ Error loading from file: {e}")
+        return None
+
+# Updated SchwabAPI class (replace your existing one)
 class SchwabAPI:
     def __init__(self):
         # Extract just the client ID without @SCHWAB.DEV suffix
         full_client_id = get_secret("SCHWAB_CLIENT_ID")
-        self.client_id = full_client_id.replace("@SCHWAB.DEV", "")
+        self.client_id = full_client_id.replace("@SCHWAB.DEV", "") if full_client_id else None
         self.client_secret = get_secret("SCHWAB_CLIENT_SECRET")
         self.redirect_uri = get_secret("SCHWAB_REDIRECT_URI")
         self.base_url = "https://api.schwabapi.com"
         self.access_token = None
         self.refresh_token = None
         self.token_expires = None
-        self.token_file = "data/schwab_token.json"
+        
+        # Initialize Secret Manager
+        self.secret_manager = CloudSecretManager()
         
         logger.info(f"🔧 Initialized SchwabAPI with client_id: {self.client_id}")
         logger.info(f"🔧 Redirect URI: {self.redirect_uri}")
@@ -36,44 +145,46 @@ class SchwabAPI:
         self.load_token()
     
     def save_token(self):
-        """Save token to file for persistence"""
+        """Save token using Secret Manager"""
         try:
             token_data = {
                 'access_token': self.access_token,
                 'refresh_token': self.refresh_token,
-                'expires': self.token_expires.isoformat() if self.token_expires else None
+                'expires': self.token_expires.isoformat() if self.token_expires else None,
+                'saved_at': datetime.now().isoformat()
             }
-            # Create data directory if it doesn't exist
-            os.makedirs(os.path.dirname(self.token_file), exist_ok=True)
-            with open(self.token_file, 'w') as f:
-                json.dump(token_data, f)
-            logger.info("✅ Token saved successfully")
+            
+            success = self.secret_manager.save_schwab_token(token_data)
+            if success:
+                logger.info("✅ Token saved successfully")
+            return success
         except Exception as e:
             logger.error(f"❌ Error saving token: {e}")
+            return False
     
     def load_token(self):
-        """Load existing token if available"""
+        """Load existing token using Secret Manager"""
         try:
-            if os.path.exists(self.token_file):
-                with open(self.token_file, 'r') as f:
-                    token_data = json.load(f)
+            token_data = self.secret_manager.load_schwab_token()
+            
+            if not token_data:
+                logger.info("ℹ️ No existing token found - will need to authenticate")
+                return
+            
+            self.access_token = token_data.get('access_token')
+            self.refresh_token = token_data.get('refresh_token')
+            
+            expires_str = token_data.get('expires')
+            if expires_str:
+                self.token_expires = datetime.fromisoformat(expires_str)
                 
-                self.access_token = token_data.get('access_token')
-                self.refresh_token = token_data.get('refresh_token')
-                
-                expires_str = token_data.get('expires')
-                if expires_str:
-                    self.token_expires = datetime.fromisoformat(expires_str)
+                # Check if token is expired
+                if datetime.now() >= self.token_expires:
+                    logger.warning("⚠️ Token expired, will need to refresh")
+                    self.access_token = None
+                else:
+                    logger.info("✅ Loaded existing valid token")
                     
-                    # Check if token is expired
-                    if datetime.now() >= self.token_expires:
-                        logger.warning("⚠️ Token expired, will need to refresh")
-                        self.access_token = None
-                    else:
-                        logger.info("✅ Loaded existing valid token")
-                        
-        except FileNotFoundError:
-            logger.info("ℹ️ No existing token found - will need to authenticate")
         except Exception as e:
             logger.error(f"❌ Error loading token: {e}")
     
@@ -115,13 +226,10 @@ class SchwabAPI:
             logger.info(f"🔑 Using client_id: {self.client_id}")
             logger.info(f"🔗 Using redirect_uri: {self.redirect_uri}")
             logger.info(f"📝 Authorization code: {authorization_code[:30]}...")
-            logger.info(f"🔒 Credentials encoded: {encoded_credentials[:20]}...")
             
-            response = requests.post(token_url, headers=headers, data=data)
+            response = requests.post(token_url, headers=headers, data=data, timeout=30)
             
             logger.info(f"📊 Token response status: {response.status_code}")
-            logger.info(f"📊 Token response headers: {dict(response.headers)}")
-            logger.info(f"📊 Token response body: {response.text}")
             
             if response.status_code == 200:
                 token_data = response.json()
@@ -138,14 +246,10 @@ class SchwabAPI:
             else:
                 logger.error(f"❌ Token error: {response.status_code}")
                 logger.error(f"❌ Error response: {response.text}")
-                logger.error(f"❌ Error headers: {dict(response.headers)}")
                 return False
                 
         except Exception as e:
             logger.error(f"❌ Exception during token exchange: {e}")
-            logger.error(f"❌ Exception type: {type(e)}")
-            import traceback
-            logger.error(f"❌ Traceback: {traceback.format_exc()}")
             return False
     
     def refresh_access_token(self):
@@ -171,7 +275,7 @@ class SchwabAPI:
         
         try:
             logger.info("🔄 Refreshing access token...")
-            response = requests.post(token_url, headers=headers, data=data)
+            response = requests.post(token_url, headers=headers, data=data, timeout=30)
             
             if response.status_code == 200:
                 token_data = response.json()
@@ -218,7 +322,7 @@ class SchwabAPI:
         }
         
         try:
-            response = requests.get(endpoint, headers=headers)
+            response = requests.get(endpoint, headers=headers, timeout=10)
             
             if response.status_code == 200:
                 data = response.json()
@@ -228,7 +332,8 @@ class SchwabAPI:
                         'ask_price': quote.get('askPrice', quote.get('lastPrice', 0)),
                         'bid_price': quote.get('bidPrice', quote.get('lastPrice', 0)),
                         'last_price': quote.get('lastPrice', 0),
-                        'volume': quote.get('totalVolume', 0)
+                        'volume': quote.get('totalVolume', 0),
+                        'source': 'schwab_api'
                     }
             elif response.status_code == 401:
                 logger.error("❌ Authentication expired, need to re-authenticate")
@@ -242,11 +347,12 @@ class SchwabAPI:
             logger.error(f"❌ Error getting quote for {symbol}: {e}")
             return None
     
+    # Keep all your existing methods for price history, etc.
     def get_price_history(self, symbol, period_type="day", period=5, 
                          frequency_type="minute", frequency=5, need_extended=False):
         """Get price history with custom timeframes"""
         if not self.ensure_authenticated():
-            return None
+            return pd.DataFrame()
         
         endpoint = f"{self.base_url}/marketdata/v1/{symbol}/pricehistory"
         
@@ -264,7 +370,7 @@ class SchwabAPI:
         }
         
         try:
-            response = requests.get(endpoint, headers=headers, params=params)
+            response = requests.get(endpoint, headers=headers, params=params, timeout=15)
             
             if response.status_code == 200:
                 data = response.json()
@@ -305,8 +411,7 @@ class SchwabAPI:
 # Global Schwab API instance
 api = SchwabAPI()
 
-# Replacement functions that match your existing data_feed.py interface
-
+# Keep all your existing interface functions exactly the same
 def fetch_option_chain(symbol):
     """Get current stock price (replaces option chain for now)"""
     try:
@@ -319,7 +424,8 @@ def fetch_option_chain(symbol):
                 'last_price': quote['last_price'],
                 'volume': quote['volume'],
                 'iv': 0.5,  # Placeholder until we add options data
-                'delta': 0.4  # Placeholder
+                'delta': 0.4,  # Placeholder
+                'source': quote.get('source', 'unknown')
             }
         else:
             # Fallback to price history if quote fails
@@ -334,7 +440,8 @@ def fetch_option_chain(symbol):
                     'last_price': price,
                     'volume': df['volume'].iloc[-1],
                     'iv': 0.5,
-                    'delta': 0.4
+                    'delta': 0.4,
+                    'source': 'schwab_history'
                 }
             
             # Final fallback with updated prices
@@ -351,13 +458,15 @@ def fetch_option_chain(symbol):
                 'last_price': price,
                 'volume': 1000000,
                 'iv': 0.5,
-                'delta': 0.4
+                'delta': 0.4,
+                'source': 'fallback'
             }
             
     except Exception as e:
         logger.error(f"❌ Error fetching data for {symbol}: {e}")
-        return {'ask_price': 500.0, 'bid_price': 499.0, 'last_price': 500.0, 'volume': 1000000, 'iv': 0.5, 'delta': 0.4}
+        return {'ask_price': 500.0, 'bid_price': 499.0, 'last_price': 500.0, 'volume': 1000000, 'iv': 0.5, 'delta': 0.4, 'source': 'error_fallback'}
 
+# Keep all other existing functions unchanged
 def get_moving_averages(symbol, periods, timeframe_minutes=5):
     """Calculate moving averages using Schwab data"""
     try:
@@ -397,6 +506,7 @@ def get_moving_averages(symbol, periods, timeframe_minutes=5):
         current_price = fetch_option_chain(symbol)['ask_price']
         return {p: current_price * (1 - 0.01 * (p / 200)) for p in periods}
 
+# Keep all other existing functions exactly as they are...
 def get_trend_data(symbol):
     """Get trend data using moving averages"""
     ma_data = get_moving_averages(symbol, [9, 21, 34, 50, 200])
@@ -494,6 +604,7 @@ def get_pivots(symbol):
             'pml': current_price - 4.5, 'pmh': current_price + 4.5
         }
 
+# Keep all other existing functions unchanged...
 def get_5day_zone(symbol):
     """Get 5-day high/low zone"""
     try:

@@ -1,0 +1,2706 @@
+{
+  "trades": [
+    {
+      "setup_id": "IWM_day_20250707_0110",
+      "symbol": "IWM",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:10:59.688239",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:10:59.688256",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SPY_day_20250707_0111",
+      "symbol": "SPY",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:00.096140",
+      "estimated_entry": 18.7602,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:00.096157",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "QQQ_day_20250707_0111",
+      "symbol": "QQQ",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:00.160109",
+      "estimated_entry": 16.6866,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:00.160128",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PEP_day_20250707_0111",
+      "symbol": "PEP",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:00.229808",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:00.229828",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PG_day_20250707_0111",
+      "symbol": "PG",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:00.566526",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:00.566546",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "IWM_swing_20250707_0111",
+      "symbol": "IWM",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:03.519756",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:03.519773",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SPY_swing_20250707_0111",
+      "symbol": "SPY",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:03.888408",
+      "estimated_entry": 18.7602,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:03.888423",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PEP_swing_20250707_0111",
+      "symbol": "PEP",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:04.086413",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:04.086435",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "QQQ_swing_20250707_0111",
+      "symbol": "QQQ",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:04.104323",
+      "estimated_entry": 16.6866,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:04.104338",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PG_swing_20250707_0111",
+      "symbol": "PG",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:04.413024",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:04.413037",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AAPL_day_20250707_0111",
+      "symbol": "AAPL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:13.207355",
+      "estimated_entry": 6.4065,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:13.207375",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NVDA_day_20250707_0111",
+      "symbol": "NVDA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:13.211083",
+      "estimated_entry": 4.7802,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:13.211096",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSFT_day_20250707_0111",
+      "symbol": "MSFT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:13.219303",
+      "estimated_entry": 14.9652,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:13.219315",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TSLA_day_20250707_0111",
+      "symbol": "TSLA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:13.230515",
+      "estimated_entry": 9.4605,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:13.230528",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "META_day_20250707_0111",
+      "symbol": "META",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:13.238971",
+      "estimated_entry": 21.5703,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:13.238982",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSFT_swing_20250707_0111",
+      "symbol": "MSFT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:17.074411",
+      "estimated_entry": 14.9652,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:17.074431",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AAPL_swing_20250707_0111",
+      "symbol": "AAPL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:17.134825",
+      "estimated_entry": 6.4065,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:17.134843",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TSLA_swing_20250707_0111",
+      "symbol": "TSLA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:17.141127",
+      "estimated_entry": 9.4605,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:17.141153",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NVDA_swing_20250707_0111",
+      "symbol": "NVDA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:17.141519",
+      "estimated_entry": 4.7802,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:17.141535",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "META_swing_20250707_0111",
+      "symbol": "META",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:17.149208",
+      "estimated_entry": 21.5703,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:17.149232",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NFLX_day_20250707_0111",
+      "symbol": "NFLX",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:25.590760",
+      "estimated_entry": 20.4,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:25.590770",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GOOGL_day_20250707_0111",
+      "symbol": "GOOGL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:25.670488",
+      "estimated_entry": 85.5,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:25.670498",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COIN_day_20250707_0111",
+      "symbol": "COIN",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:25.711047",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:25.711073",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMZN_day_20250707_0111",
+      "symbol": "AMZN",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:25.766937",
+      "estimated_entry": 105.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:25.766946",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LLY_day_20250707_0111",
+      "symbol": "LLY",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:25.768035",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:25.768043",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GOOGL_swing_20250707_0111",
+      "symbol": "GOOGL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:29.460692",
+      "estimated_entry": 85.5,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:29.460714",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NFLX_swing_20250707_0111",
+      "symbol": "NFLX",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:29.495115",
+      "estimated_entry": 20.4,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:29.495132",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COIN_swing_20250707_0111",
+      "symbol": "COIN",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:29.574020",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:29.574030",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LLY_swing_20250707_0111",
+      "symbol": "LLY",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:29.733759",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:29.733784",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMZN_swing_20250707_0111",
+      "symbol": "AMZN",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:29.734404",
+      "estimated_entry": 105.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:29.734413",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMD_day_20250707_0111",
+      "symbol": "AMD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:37.904430",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:37.904442",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSTR_day_20250707_0111",
+      "symbol": "MSTR",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:38.094531",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:38.094545",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRWD_day_20250707_0111",
+      "symbol": "CRWD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:38.263184",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:38.263196",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AVGO_day_20250707_0111",
+      "symbol": "AVGO",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:38.264671",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:38.264685",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ARM_day_20250707_0111",
+      "symbol": "ARM",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:38.266126",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:38.266138",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMD_swing_20250707_0111",
+      "symbol": "AMD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:41.777178",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:41.777189",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSTR_swing_20250707_0111",
+      "symbol": "MSTR",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:41.863623",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:41.863635",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRWD_swing_20250707_0111",
+      "symbol": "CRWD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:42.087942",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:42.087951",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AVGO_swing_20250707_0111",
+      "symbol": "AVGO",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:42.129456",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:42.129466",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ARM_swing_20250707_0111",
+      "symbol": "ARM",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:42.129608",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:42.129616",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRM_day_20250707_0111",
+      "symbol": "CRM",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:50.765700",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:50.765716",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PANW_day_20250707_0111",
+      "symbol": "PANW",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:50.774737",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:50.774750",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COST_day_20250707_0111",
+      "symbol": "COST",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:50.779271",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:50.779283",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "HD_day_20250707_0111",
+      "symbol": "HD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:50.779545",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:50.779556",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BA_day_20250707_0111",
+      "symbol": "BA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:11:50.782641",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:50.782655",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COST_swing_20250707_0111",
+      "symbol": "COST",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:55.284282",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:55.284299",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BA_swing_20250707_0111",
+      "symbol": "BA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:55.287897",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:55.287915",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "HD_swing_20250707_0111",
+      "symbol": "HD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:55.288805",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:55.288823",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PANW_swing_20250707_0111",
+      "symbol": "PANW",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:55.289717",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:55.289728",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRM_swing_20250707_0111",
+      "symbol": "CRM",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:11:55.290539",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:11:55.290549",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CAT_day_20250707_0112",
+      "symbol": "CAT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:03.736657",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:03.736673",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SNOW_day_20250707_0112",
+      "symbol": "SNOW",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:03.874268",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:03.874283",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "UNH_day_20250707_0112",
+      "symbol": "UNH",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:03.880565",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:03.880577",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LULU_day_20250707_0112",
+      "symbol": "LULU",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:03.886428",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:03.886440",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ADBE_day_20250707_0112",
+      "symbol": "ADBE",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:03.888312",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:03.888324",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CAT_swing_20250707_0112",
+      "symbol": "CAT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:07.521173",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:07.521182",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SNOW_swing_20250707_0112",
+      "symbol": "SNOW",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:07.650448",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:07.650459",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "UNH_swing_20250707_0112",
+      "symbol": "UNH",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:07.761446",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:07.761469",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LULU_swing_20250707_0112",
+      "symbol": "LULU",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:07.774904",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:07.774913",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ADBE_swing_20250707_0112",
+      "symbol": "ADBE",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:07.778109",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:07.778120",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DELL_day_20250707_0112",
+      "symbol": "DELL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:16.111266",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:16.111276",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DE_day_20250707_0112",
+      "symbol": "DE",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:16.111411",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:16.111419",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GLD_day_20250707_0112",
+      "symbol": "GLD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:16.147863",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:16.147874",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ANF_day_20250707_0112",
+      "symbol": "ANF",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:16.196125",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:16.196135",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MDB_day_20250707_0112",
+      "symbol": "MDB",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:16.224220",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:16.224229",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DELL_swing_20250707_0112",
+      "symbol": "DELL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:19.989483",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:19.989498",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GLD_swing_20250707_0112",
+      "symbol": "GLD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:20.023781",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:20.023793",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DE_swing_20250707_0112",
+      "symbol": "DE",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:20.065254",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:20.065274",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ANF_swing_20250707_0112",
+      "symbol": "ANF",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:20.107851",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:20.107866",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MDB_swing_20250707_0112",
+      "symbol": "MDB",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:20.117601",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:20.117617",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PDD_day_20250707_0112",
+      "symbol": "PDD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:29.181308",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:29.181317",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AXP_day_20250707_0112",
+      "symbol": "AXP",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:29.181447",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:29.181455",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "FDX_day_20250707_0112",
+      "symbol": "FDX",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:29.182315",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:29.182323",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ORCL_day_20250707_0112",
+      "symbol": "ORCL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:29.185640",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:29.185649",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TGT_day_20250707_0112",
+      "symbol": "TGT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:29.483368",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:29.483377",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PDD_swing_20250707_0112",
+      "symbol": "PDD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:33.625786",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:33.625798",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "FDX_swing_20250707_0112",
+      "symbol": "FDX",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:33.626980",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:33.626992",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AXP_swing_20250707_0112",
+      "symbol": "AXP",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:33.628310",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:33.628344",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ORCL_swing_20250707_0112",
+      "symbol": "ORCL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:33.630058",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:33.630071",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TGT_swing_20250707_0112",
+      "symbol": "TGT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:33.942021",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:33.942033",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "WMT_day_20250707_0112",
+      "symbol": "WMT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:42.084092",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:42.084104",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BABA_day_20250707_0112",
+      "symbol": "BABA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:42.183011",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:42.183023",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NKE_day_20250707_0112",
+      "symbol": "NKE",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:42.189765",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:42.189784",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CMG_day_20250707_0112",
+      "symbol": "CMG",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:42.237574",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:42.237596",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ROKU_day_20250707_0112",
+      "symbol": "ROKU",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:12:42.243211",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:42.243223",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "WMT_swing_20250707_0112",
+      "symbol": "WMT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:45.924537",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:45.924556",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NKE_swing_20250707_0112",
+      "symbol": "NKE",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:46.046203",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:46.046228",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BABA_swing_20250707_0112",
+      "symbol": "BABA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:46.068068",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:46.068081",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CMG_swing_20250707_0112",
+      "symbol": "CMG",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:46.124004",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:46.124022",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ROKU_swing_20250707_0112",
+      "symbol": "ROKU",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:12:46.129395",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:12:46.129413",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "QQQ_day_20250707_0113",
+      "symbol": "QQQ",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:13:45.573291",
+      "estimated_entry": 16.6866,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:45.573308",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "IWM_day_20250707_0113",
+      "symbol": "IWM",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:13:45.641090",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:45.641118",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SPY_day_20250707_0113",
+      "symbol": "SPY",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:13:45.659574",
+      "estimated_entry": 18.7602,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:45.659589",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PEP_day_20250707_0113",
+      "symbol": "PEP",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:13:46.165333",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:46.165353",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PG_day_20250707_0113",
+      "symbol": "PG",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:13:46.189453",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:46.189481",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "IWM_swing_20250707_0113",
+      "symbol": "IWM",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:13:50.076481",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:50.076499",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "QQQ_swing_20250707_0113",
+      "symbol": "QQQ",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:13:50.107885",
+      "estimated_entry": 16.6866,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:50.107904",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SPY_swing_20250707_0113",
+      "symbol": "SPY",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:13:50.237771",
+      "estimated_entry": 18.7602,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:50.237798",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PEP_swing_20250707_0113",
+      "symbol": "PEP",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:13:50.688115",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:50.688129",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PG_swing_20250707_0113",
+      "symbol": "PG",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:13:50.813979",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:13:50.813993",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AAPL_day_20250707_0114",
+      "symbol": "AAPL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:00.982152",
+      "estimated_entry": 6.4065,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:00.982161",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "META_day_20250707_0114",
+      "symbol": "META",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:00.982872",
+      "estimated_entry": 21.5703,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:00.982881",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NVDA_day_20250707_0114",
+      "symbol": "NVDA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:00.983585",
+      "estimated_entry": 4.7802,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:00.983594",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSFT_day_20250707_0114",
+      "symbol": "MSFT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:00.989085",
+      "estimated_entry": 14.9652,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:00.989100",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TSLA_day_20250707_0114",
+      "symbol": "TSLA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:00.992348",
+      "estimated_entry": 9.4605,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:00.992359",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSFT_swing_20250707_0114",
+      "symbol": "MSFT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:05.567591",
+      "estimated_entry": 14.9652,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:05.567614",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AAPL_swing_20250707_0114",
+      "symbol": "AAPL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:05.660471",
+      "estimated_entry": 6.4065,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:05.660483",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "META_swing_20250707_0114",
+      "symbol": "META",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:05.720491",
+      "estimated_entry": 21.5703,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:05.720503",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TSLA_swing_20250707_0114",
+      "symbol": "TSLA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:05.721676",
+      "estimated_entry": 9.4605,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:05.721687",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NVDA_swing_20250707_0114",
+      "symbol": "NVDA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:05.728417",
+      "estimated_entry": 4.7802,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:05.728431",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMZN_day_20250707_0114",
+      "symbol": "AMZN",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:14.958919",
+      "estimated_entry": 105.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:14.958937",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GOOGL_day_20250707_0114",
+      "symbol": "GOOGL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:14.960329",
+      "estimated_entry": 85.5,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:14.960341",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NFLX_day_20250707_0114",
+      "symbol": "NFLX",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:14.961459",
+      "estimated_entry": 20.4,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:14.961471",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LLY_day_20250707_0114",
+      "symbol": "LLY",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:15.122489",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:15.122501",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COIN_day_20250707_0114",
+      "symbol": "COIN",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:15.133205",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:15.133217",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GOOGL_swing_20250707_0114",
+      "symbol": "GOOGL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:19.465315",
+      "estimated_entry": 85.5,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:19.465332",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMZN_swing_20250707_0114",
+      "symbol": "AMZN",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:19.478147",
+      "estimated_entry": 105.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:19.478170",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NFLX_swing_20250707_0114",
+      "symbol": "NFLX",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:19.491084",
+      "estimated_entry": 20.4,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:19.491096",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LLY_swing_20250707_0114",
+      "symbol": "LLY",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:19.592651",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:19.592674",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COIN_swing_20250707_0114",
+      "symbol": "COIN",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:19.666940",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:19.666957",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ARM_day_20250707_0114",
+      "symbol": "ARM",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:28.991207",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:28.991219",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRWD_day_20250707_0114",
+      "symbol": "CRWD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:28.991999",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:28.992010",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMD_day_20250707_0114",
+      "symbol": "AMD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:28.992755",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:28.992766",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AVGO_day_20250707_0114",
+      "symbol": "AVGO",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:28.994022",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:28.994032",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSTR_day_20250707_0114",
+      "symbol": "MSTR",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:28.995207",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:28.995219",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AMD_swing_20250707_0114",
+      "symbol": "AMD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:33.603618",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:33.603635",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MSTR_swing_20250707_0114",
+      "symbol": "MSTR",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:33.608585",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:33.608597",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRWD_swing_20250707_0114",
+      "symbol": "CRWD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:33.633233",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:33.633247",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ARM_swing_20250707_0114",
+      "symbol": "ARM",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:33.634509",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:33.634522",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AVGO_swing_20250707_0114",
+      "symbol": "AVGO",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:33.642275",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:33.642287",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PANW_day_20250707_0114",
+      "symbol": "PANW",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:42.600736",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:42.600756",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COST_day_20250707_0114",
+      "symbol": "COST",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:42.719182",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:42.719195",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BA_day_20250707_0114",
+      "symbol": "BA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:42.750490",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:42.750503",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRM_day_20250707_0114",
+      "symbol": "CRM",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:42.755149",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:42.755160",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "HD_day_20250707_0114",
+      "symbol": "HD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:42.759776",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:42.759787",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PANW_swing_20250707_0114",
+      "symbol": "PANW",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:47.081233",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:47.081247",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "HD_swing_20250707_0114",
+      "symbol": "HD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:47.223463",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:47.223476",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CRM_swing_20250707_0114",
+      "symbol": "CRM",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:47.321785",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:47.321799",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BA_swing_20250707_0114",
+      "symbol": "BA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:47.327086",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:47.327100",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "COST_swing_20250707_0114",
+      "symbol": "COST",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:14:47.338269",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:47.338281",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ADBE_day_20250707_0114",
+      "symbol": "ADBE",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:56.328392",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:56.328408",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LULU_day_20250707_0114",
+      "symbol": "LULU",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:56.430555",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:56.430585",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "UNH_day_20250707_0114",
+      "symbol": "UNH",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:56.435615",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:56.435627",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CAT_day_20250707_0114",
+      "symbol": "CAT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:56.462383",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:56.462400",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SNOW_day_20250707_0114",
+      "symbol": "SNOW",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:14:56.586481",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:14:56.586494",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ADBE_swing_20250707_0115",
+      "symbol": "ADBE",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:00.911910",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:00.911923",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "UNH_swing_20250707_0115",
+      "symbol": "UNH",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:00.953591",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:00.953608",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "LULU_swing_20250707_0115",
+      "symbol": "LULU",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:00.959303",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:00.959315",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CAT_swing_20250707_0115",
+      "symbol": "CAT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:01.032033",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:01.032051",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "SNOW_swing_20250707_0115",
+      "symbol": "SNOW",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:01.139039",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:01.139056",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DELL_day_20250707_0115",
+      "symbol": "DELL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:10.079391",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:10.079441",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DE_day_20250707_0115",
+      "symbol": "DE",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:10.145196",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:10.145209",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GLD_day_20250707_0115",
+      "symbol": "GLD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:10.154040",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:10.154052",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MDB_day_20250707_0115",
+      "symbol": "MDB",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:10.181944",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:10.181962",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ANF_day_20250707_0115",
+      "symbol": "ANF",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:10.253072",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:10.253089",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DELL_swing_20250707_0115",
+      "symbol": "DELL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:14.553105",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:14.553118",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "DE_swing_20250707_0115",
+      "symbol": "DE",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:14.554231",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:14.554242",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "MDB_swing_20250707_0115",
+      "symbol": "MDB",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:14.633979",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:14.634000",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "GLD_swing_20250707_0115",
+      "symbol": "GLD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:14.729877",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:14.729892",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ANF_swing_20250707_0115",
+      "symbol": "ANF",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:14.767469",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:14.767486",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ORCL_day_20250707_0115",
+      "symbol": "ORCL",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:23.664313",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:23.664330",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TGT_day_20250707_0115",
+      "symbol": "TGT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:23.671450",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:23.671462",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AXP_day_20250707_0115",
+      "symbol": "AXP",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:23.700634",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:23.700651",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PDD_day_20250707_0115",
+      "symbol": "PDD",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:23.706733",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:23.706743",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "FDX_day_20250707_0115",
+      "symbol": "FDX",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:23.885032",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:23.885050",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ORCL_swing_20250707_0115",
+      "symbol": "ORCL",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:28.128243",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:28.128259",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "TGT_swing_20250707_0115",
+      "symbol": "TGT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:28.175250",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:28.175283",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "PDD_swing_20250707_0115",
+      "symbol": "PDD",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:28.219491",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:28.219507",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "AXP_swing_20250707_0115",
+      "symbol": "AXP",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:28.245679",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:28.245696",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "FDX_swing_20250707_0115",
+      "symbol": "FDX",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:28.386107",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:28.386124",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NKE_day_20250707_0115",
+      "symbol": "NKE",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:38.010697",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:38.010711",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "WMT_day_20250707_0115",
+      "symbol": "WMT",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:38.053551",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:38.053563",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BABA_day_20250707_0115",
+      "symbol": "BABA",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:38.061657",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:38.061668",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CMG_day_20250707_0115",
+      "symbol": "CMG",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:38.076592",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:38.076604",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ROKU_day_20250707_0115",
+      "symbol": "ROKU",
+      "trade_style": "day",
+      "setup_time": "2025-07-07T01:15:38.083386",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:38.083397",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "NKE_swing_20250707_0115",
+      "symbol": "NKE",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:42.415754",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:42.415771",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "WMT_swing_20250707_0115",
+      "symbol": "WMT",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:42.565960",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:42.566031",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "BABA_swing_20250707_0115",
+      "symbol": "BABA",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:42.567639",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:42.567652",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "ROKU_swing_20250707_0115",
+      "symbol": "ROKU",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:42.581751",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:42.581763",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    },
+    {
+      "setup_id": "CMG_swing_20250707_0115",
+      "symbol": "CMG",
+      "trade_style": "swing",
+      "setup_time": "2025-07-07T01:15:42.606762",
+      "estimated_entry": 15.0,
+      "confluence_score": 85,
+      "market_conditions": {
+        "timestamp": "2025-07-07T01:15:42.606781",
+        "market_open": true,
+        "vix_level": "Normal",
+        "market_trend": "Bullish"
+      },
+      "status": "SETUP_DETECTED"
+    }
+  ],
+  "daily_stats": {},
+  "last_updated": "2025-07-07T01:15:42.606889"
+}
