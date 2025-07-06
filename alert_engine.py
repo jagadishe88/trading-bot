@@ -4,9 +4,11 @@ import json
 import requests
 import sys
 import math
-from datetime import datetime, timedelta
 import threading
 import time
+from datetime import datetime, timedelta
+from telegram_alert import send_telegram_alert
+
 
 class LiveOptionsMonitor:
     def __init__(self):
@@ -289,22 +291,22 @@ class LiveOptionsMonitor:
         final_pnl = exit_price - trade['actual_entry_cost']
         final_pnl_percent = (final_pnl / trade['actual_entry_cost']) * 100
         
-        # Send exit alert
-        exit_alert = f"""🚨 **TRADE EXIT EXECUTED**
+        # Send exit alert - Fixed Telegram formatting
+        exit_alert = f"""🚨 *TRADE EXIT EXECUTED*
 
-📊 **{trade['symbol']} {trade['trade_style'].upper()}** 
+📊 *{trade['symbol']} {trade['trade_style'].upper()}* 
 🎫 ${trade['strike_price']} CALL {trade['expiration_date']}
 
-💰 **PERFORMANCE:**
+💰 *PERFORMANCE:*
 • Entry: ${trade['actual_entry_cost']:.2f}
 • Exit: ${exit_price:.2f}
 • P&L: ${final_pnl:.2f} ({final_pnl_percent:+.1f}%)
 • Max Profit: ${trade['max_profit']:.2f}
 • Max Drawdown: ${trade['max_drawdown']:.2f}
 
-🚨 **EXIT REASON:** {exit_reason}
+🚨 *EXIT REASON:* {exit_reason}
 
-⏰ **TRADE DURATION:** {self.calculate_trade_duration(trade)}
+⏰ *TRADE DURATION:* {self.calculate_trade_duration(trade)}
 
 #{trade['symbol']} #EXIT #{trade['trade_style'].upper()}"""
 
@@ -315,17 +317,17 @@ class LiveOptionsMonitor:
         """Send confirmation when trade is entered with real price"""
         config = self.trade_configs[trade['trade_style']]
         
-        alert = f"""✅ **TRADE ENTERED - LIVE MONITORING STARTED**
+        alert = f"""✅ *TRADE ENTERED - LIVE MONITORING STARTED*
 
-📊 **{trade['symbol']} {trade['trade_style'].upper()}**
+📊 *{trade['symbol']} {trade['trade_style'].upper()}*
 🎫 ${trade['strike_price']} CALL exp {trade['expiration_date']}
 
-💰 **REAL ENTRY PRICE:** ${trade['actual_entry_cost']:.2f}
-🎯 **Target:** ${trade['target_price']:.2f} ({((trade['target_price']/trade['actual_entry_cost']-1)*100):.0f}% gain)
-🛡️ **Stop:** ${trade['stop_loss_price']:.2f} (50% rule)
-⏰ **Max Hold:** {config['duration_text']}
+💰 *REAL ENTRY PRICE:* ${trade['actual_entry_cost']:.2f}
+🎯 *Target:* ${trade['target_price']:.2f} ({((trade['target_price']/trade['actual_entry_cost']-1)*100):.0f}% gain)
+🛡️ *Stop:* ${trade['stop_loss_price']:.2f} (50% rule)
+⏰ *Max Hold:* {config['duration_text']}
 
-🤖 **LIVE MONITORING ACTIVE:**
+🤖 *LIVE MONITORING ACTIVE:*
 ✅ Technical breakdown detection
 ✅ Profit target monitoring  
 ✅ Time limit tracking
@@ -342,7 +344,7 @@ You will receive automatic exit alerts when any condition triggers.
         if not trade['current_option_price']:
             return
         
-        update = f"""📊 **TRADE UPDATE**
+        update = f"""📊 *TRADE UPDATE*
 
 {trade['symbol']} {trade['trade_style'].upper()}
 Current: ${trade['current_option_price']:.2f}
@@ -417,6 +419,137 @@ def start_live_monitoring():
     print("⚡ Real-time alerts for technical breakdown, profit targets, time limits, and stop losses")
     
     return monitor
+
+# ADDED: The missing generate_alert_improved function that main.py needs
+def generate_alert_improved(symbol, trade_type):
+    """
+    Generate trading alerts - integrates with your existing live monitoring system
+    This function is called by main.py for each symbol and trade type
+    """
+    try:
+        print(f"🔍 Analyzing {symbol} for {trade_type} strategy")
+        
+        # Get market data using your data_feed
+        quote_data = data_feed.fetch_option_chain(symbol)
+        if not quote_data:
+            print(f"❌ No data available for {symbol}")
+            return
+        
+        current_price = quote_data['ask_price']
+        
+        # Get technical indicators
+        ma_data = data_feed.get_moving_averages(symbol, [9, 21, 34, 50, 200])
+        rvol = data_feed.calculate_rvol(symbol)
+        trend_data = data_feed.get_trend_data(symbol)
+        pivots = data_feed.get_pivots(symbol)
+        
+        # Create confluence data structure for your live monitoring system
+        confluence_data = {
+            'current_price': current_price,
+            'trends': trend_data,
+            'ma_data': ma_data,
+            'rvol': rvol,
+            'pivots': pivots,
+            'support_levels': [
+                {'name': 'S1 Pivot', 'level': pivots.get('s1', current_price * 0.98)},
+                {'name': '21 EMA', 'level': ma_data.get(21, current_price * 0.99)},
+                {'name': 'PDL', 'level': pivots.get('pdl', current_price * 0.97)}
+            ]
+        }
+        
+        # Get the threshold for this trade type from your sophisticated config
+        trade_config = {
+            'scalp': {'rvol_threshold': 150},
+            'day': {'rvol_threshold': 130}, 
+            'swing': {'rvol_threshold': 120}
+        }
+        
+        config = trade_config.get(trade_type, {'rvol_threshold': 130})
+        rvol_threshold = config['rvol_threshold'] / 100  # Convert to decimal
+        
+        # Alert conditions based on your sophisticated logic
+        alert_triggered = False
+        alert_reason = ""
+        
+        # Strong bullish confluence check
+        if (trend_data.get('9_21') == 'Bullish' and 
+            trend_data.get('34_50') == 'Bullish' and 
+            rvol > rvol_threshold and 
+            current_price > ma_data.get(21, 0)):
+            
+            alert_triggered = True
+            alert_reason = f"Strong bullish confluence - RVOL: {rvol:.1f}x, All EMAs bullish"
+        
+        # Breakout setup check
+        elif (current_price > pivots.get('r1', current_price) and 
+              rvol > rvol_threshold * 1.2):  # Higher threshold for breakouts
+            
+            alert_triggered = True
+            alert_reason = f"Breakout above R1 pivot (${pivots.get('r1', 0):.2f}) with high volume"
+        
+        # Multi-timeframe alignment check
+        elif (trend_data.get('mtf_clouds', {}).get('1H') == 'Bullish' and
+              trend_data.get('mtf_clouds', {}).get('4H') == 'Bullish' and
+              rvol > rvol_threshold):
+            
+            alert_triggered = True
+            alert_reason = f"Multi-timeframe bullish alignment with elevated volume"
+        
+        if alert_triggered:
+            # Use your sophisticated live monitoring system
+            live_monitor = LiveOptionsMonitor()
+            
+            # Estimate option entry cost based on your logic
+            estimated_entry = current_price * 0.03  # Rough 3% of stock price for ATM options
+            
+            # Create live trade setup using your existing system
+            trade_id = live_monitor.create_live_trade(
+                symbol, 
+                trade_type, 
+                confluence_data, 
+                estimated_entry
+            )
+            
+            # Send sophisticated setup alert - Fixed Telegram formatting
+            setup_alert = f"""🚨 *{trade_type.upper()} SETUP DETECTED*
+
+*{symbol}* - ${current_price:.2f}
+*Reason:* {alert_reason}
+
+*Technical Confluence:*
+• 9/21 EMA: {trend_data.get('9_21', 'N/A')}
+• 34/50 EMA: {trend_data.get('34_50', 'N/A')}
+• RVOL: {rvol:.1f}x (Threshold: {rvol_threshold:.1f}x)
+• Price vs 21MA: {'Above' if current_price > ma_data.get(21, 0) else 'Below'}
+
+*Key Levels:*
+• R1 Pivot: ${pivots.get('r1', 0):.2f}
+• S1 Pivot: ${pivots.get('s1', 0):.2f}
+• 50 EMA: ${ma_data.get(50, 0):.2f}
+
+*Estimated Entry:* ~${estimated_entry:.2f}
+*Trade Style:* {trade_type.capitalize()}
+
+*LIVE MONITORING READY*
+Trade ID: {trade_id}
+
+Use your live monitoring system to enter this trade with real pricing!
+
+#{symbol} #SETUP #{trade_type.upper()}"""
+            
+            # Send the alert using your existing system
+            telegram_success = send_telegram_alert(setup_alert)
+            
+            if telegram_success:
+                print(f"✅ {trade_type.upper()} setup alert sent for {symbol}: {alert_reason}")
+            else:
+                print(f"❌ {trade_type.upper()} setup alert FAILED for {symbol}: {alert_reason}")
+                print("📱 Check Telegram bot configuration and try again")
+        else:
+            print(f"📊 {symbol}: No {trade_type} setup conditions met (RVOL: {rvol:.1f}x, Req: {rvol_threshold:.1f}x)")
+            
+    except Exception as e:
+        print(f"❌ Error in generate_alert_improved for {symbol}: {e}")
 
 # Usage example
 if __name__ == "__main__":

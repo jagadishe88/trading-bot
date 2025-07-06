@@ -1,4 +1,4 @@
-# Schwab API Data Feed - Complete Implementation
+# Schwab API Data Feed - Complete Implementation with Enhanced Debugging
 
 import requests
 import json
@@ -28,6 +28,9 @@ class SchwabAPI:
         self.refresh_token = None
         self.token_expires = None
         self.token_file = "data/schwab_token.json"
+        
+        logger.info(f"🔧 Initialized SchwabAPI with client_id: {self.client_id}")
+        logger.info(f"🔧 Redirect URI: {self.redirect_uri}")
         
         # Try to load existing token
         self.load_token()
@@ -80,7 +83,7 @@ class SchwabAPI:
             'client_id': self.client_id,  # Use clean client ID
             'redirect_uri': self.redirect_uri,
             'response_type': 'code',
-            'scope': 'readonly'
+            'scope': 'accounts trading'
         }
         
         query_string = urllib.parse.urlencode(params)
@@ -108,13 +111,17 @@ class SchwabAPI:
         
         try:
             logger.info("🔄 Requesting access token...")
-            logger.info(f"Using client_id: {self.client_id}")
-            logger.info(f"Using redirect_uri: {self.redirect_uri}")
+            logger.info(f"📍 Token URL: {token_url}")
+            logger.info(f"🔑 Using client_id: {self.client_id}")
+            logger.info(f"🔗 Using redirect_uri: {self.redirect_uri}")
+            logger.info(f"📝 Authorization code: {authorization_code[:30]}...")
+            logger.info(f"🔒 Credentials encoded: {encoded_credentials[:20]}...")
             
             response = requests.post(token_url, headers=headers, data=data)
             
             logger.info(f"📊 Token response status: {response.status_code}")
-            logger.info(f"📊 Token response: {response.text}")
+            logger.info(f"📊 Token response headers: {dict(response.headers)}")
+            logger.info(f"📊 Token response body: {response.text}")
             
             if response.status_code == 200:
                 token_data = response.json()
@@ -130,11 +137,15 @@ class SchwabAPI:
                 return True
             else:
                 logger.error(f"❌ Token error: {response.status_code}")
-                logger.error(f"Response: {response.text}")
+                logger.error(f"❌ Error response: {response.text}")
+                logger.error(f"❌ Error headers: {dict(response.headers)}")
                 return False
                 
         except Exception as e:
-            logger.error(f"❌ Error getting access token: {e}")
+            logger.error(f"❌ Exception during token exchange: {e}")
+            logger.error(f"❌ Exception type: {type(e)}")
+            import traceback
+            logger.error(f"❌ Traceback: {traceback.format_exc()}")
             return False
     
     def refresh_access_token(self):

@@ -79,7 +79,7 @@ def index():
 
 @app.route("/test-alert")
 def test_alert():
-    from telegram_alert import send_alert
+    from telegram_alert import send_telegram_alert
     test_data = {
         "symbol": "AAPL",
         "price": 211.77,
@@ -95,7 +95,7 @@ def test_alert():
         "alert_type": "TEST-ALERT",
         "trade_type": "Day"
     }
-    send_alert(test_data)
+    send_telegram_alert(test_data)
     return jsonify({"status": "success", "message": "Test alert sent", "test_data": test_data})
 
 # === ✅ SCHWAB OAUTH ROUTES ===
@@ -115,13 +115,14 @@ def schwab_auth():
         "client_id": client_id,  # Use clean client ID
         "response_type": "code",
         "redirect_uri": redirect_uri,
-        "scope": "readonly"
+        "scope": "accounts trading"
     }
     full_url = f"{auth_url}?{urllib.parse.urlencode(params)}"
     return {
         "auth_url": full_url,
         "client_id_used": client_id,
         "redirect_uri": redirect_uri,
+        "scope_used": "accounts trading",
         "instructions": """
         1. Click the auth_url link to authorize
         2. After authorization, you'll be redirected to your GitHub Pages callback
@@ -180,6 +181,38 @@ def schwab_callback():
         "code": code,
         "next_step": f"Use this URL to complete: /schwab-token?code={code}"
     }
+
+
+# In your main.py, add this route BEFORE the final if __name__ == "__main__": section
+
+@app.route("/extract")
+def extract_code():
+    code = request.args.get("code")
+    if not code:
+        return """
+        <h2>❌ No Code Found</h2>
+        <p>URL should be: http://127.0.0.1:8080/extract?code=YOUR_CODE</p>
+        <p><a href="/schwab-auth">Start OAuth Again</a></p>
+        """, 400
+    
+    # Do token exchange immediately
+    from data_feed import SchwabAPI
+    api = SchwabAPI()
+    success = api.get_access_token(code)
+    
+    if success:
+        return """
+        <h2>✅ Token Exchange Successful!</h2>
+        <p>Schwab API is now authenticated and ready to use.</p>
+        <p><a href="/schwab-status">Check Status</a></p>
+        """
+    else:
+        return """
+        <h2>❌ Token Exchange Failed</h2>
+        <p>Check your Flask server logs for detailed error information.</p>
+        <p><a href="/schwab-auth">Try Again</a></p>
+        """
+
 
 # === ✅ END SCHWAB OAUTH ROUTES ===
 

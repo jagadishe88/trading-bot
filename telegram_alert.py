@@ -16,23 +16,32 @@ def send_telegram_alert(alert_data):
 
         # NEW: Check if it's a simple string (from alert_engine.py)
         if isinstance(alert_data, str):
-            message = f"🚨 *TRADING ALERT* 🚨\n\n{alert_data}"
+            # Debug: Print message length and problematic characters
+            print(f"📱 Sending message length: {len(alert_data)} chars")
+            
+            # Clean the message of potential problematic characters
+            message = alert_data
+            
+            # Replace any problematic characters that might cause parsing issues
+            message = message.replace('~', '').replace('`', '')  # Remove potential markdown conflicts
             
             url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-            payload = {
+            
+            # Try without any formatting first (most reliable)
+            plain_payload = {
                 'chat_id': TELEGRAM_CHAT_ID,
-                'text': message,
-                'parse_mode': 'Markdown'
+                'text': message.replace('*', '').replace('_', '')  # Remove all markdown
             }
             
-            response = requests.post(url, json=payload)
+            response = requests.post(url, json=plain_payload)
             
             if response.status_code == 200:
-                print(f"✅ Alert sent to Telegram successfully!")
+                print(f"✅ Alert sent to Telegram successfully (plain text)!")
                 return True
             else:
                 print(f"❌ Failed to send Telegram alert. Status: {response.status_code}")
                 print(f"Response: {response.text}")
+                print(f"🔍 Message preview: {message[:100]}...")
                 return False
 
         # EXISTING: Handle dictionary format (from other parts of your code)
@@ -51,7 +60,7 @@ def send_telegram_alert(alert_data):
         rvol = alert_data.get('rvol', 'N/A')
         timestamp = alert_data.get('timestamp', 'N/A')
 
-        # Format message
+        # Format message with safer markdown
         message = f"""🚨 *TRADING ALERT* 🚨
 
 📊 *Symbol:* {symbol}
@@ -91,7 +100,23 @@ def send_telegram_alert(alert_data):
         else:
             print(f"❌ Failed to send Telegram alert. Status: {response.status_code}")
             print(f"Response: {response.text}")
-            return False
+            
+            # Try sending as plain text if markdown fails
+            print("🔄 Retrying without markdown formatting...")
+            plain_payload = {
+                'chat_id': TELEGRAM_CHAT_ID,
+                'text': message.replace('*', '').replace('_', '')  # Remove markdown
+                # No parse_mode for plain text
+            }
+            
+            retry_response = requests.post(url, json=plain_payload)
+            if retry_response.status_code == 200:
+                print(f"✅ Alert sent as plain text successfully!")
+                return True
+            else:
+                print(f"❌ Plain text retry also failed. Status: {retry_response.status_code}")
+                print(f"Response: {retry_response.text}")
+                return False
 
     except Exception as e:
         print(f"❌ Error sending Telegram alert: {e}")
@@ -114,6 +139,52 @@ def test_telegram_connection():
             return False
     except Exception as e:
         print(f"❌ Error testing Telegram connection: {e}")
+        return False
+
+# Alternative function using HTML formatting (more reliable than Markdown)
+def send_telegram_alert_html(alert_data):
+    """
+    Send a formatted trading alert to Telegram using HTML formatting
+    """
+    try:
+        if not alert_data:
+            print("❌ No alert data to send")
+            return False
+
+        if isinstance(alert_data, str):
+            # Convert markdown to HTML formatting
+            message = alert_data.replace('*', '<b>').replace('*', '</b>')
+            # Fix the replacement pattern
+            message = alert_data
+            # Simple conversion from markdown to HTML
+            import re
+            message = re.sub(r'\*([^*]+)\*', r'<b>\1</b>', message)
+            
+            url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+            payload = {
+                'chat_id': TELEGRAM_CHAT_ID,
+                'text': message,
+                'parse_mode': 'HTML'
+            }
+            
+            response = requests.post(url, json=payload)
+            
+            if response.status_code == 200:
+                print(f"✅ HTML Alert sent to Telegram successfully!")
+                return True
+            else:
+                print(f"❌ Failed to send HTML Telegram alert. Status: {response.status_code}")
+                print(f"Response: {response.text}")
+                return False
+        
+        # Handle dictionary format with HTML
+        else:
+            # Same dictionary handling as before but with HTML formatting
+            # ... (implement if needed)
+            pass
+            
+    except Exception as e:
+        print(f"❌ Error sending HTML Telegram alert: {e}")
         return False
 
 if __name__ == "__main__":
