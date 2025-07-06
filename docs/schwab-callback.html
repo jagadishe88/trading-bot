@@ -1,13 +1,145 @@
-<!-- docs/schwab-callback.html -->
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Schwab Auth Callback</title>
-  </head>
-  <body>
-    <h1>Schwab OAuth Redirect Successful</h1>
-    <p>You can now close this window.</p>
-  </body>
-</html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schwab OAuth Callback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: #28a745;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .code-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 16px;
+            word-break: break-all;
+            margin: 20px 0;
+        }
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .error {
+            color: #dc3545;
+            font-size: 18px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 Schwab OAuth Callback</h1>
+        
+        <div id="success" style="display: none;">
+            <div class="success">✅ Authorization Successful!</div>
+            <p>Your Schwab authorization code has been received:</p>
+            <div class="code-box" id="authCode"></div>
+            
+            <div class="instructions">
+                <h3>📋 Next Steps:</h3>
+                <ol>
+                    <li><strong>Copy the authorization code above</strong></li>
+                    <li><strong>Use it with your trading bot:</strong>
+                        <br><code>curl "http://localhost:8080/schwab-token?code=YOUR_CODE_HERE"</code>
+                        <br><em>OR</em>
+                        <br><code>curl "https://trading-bot-r3y73gu4xq-uc.a.run.app/schwab-token?code=YOUR_CODE_HERE"</code>
+                    </li>
+                    <li><strong>Replace YOUR_CODE_HERE with the actual code</strong></li>
+                </ol>
+            </div>
+            
+            <button onclick="copyCode()">📋 Copy Code</button>
+            <button onclick="location.reload()">🔄 Refresh</button>
+        </div>
+        
+        <div id="error" style="display: none;">
+            <div class="error">❌ No Authorization Code Found</div>
+            <p>This page should be accessed via Schwab's OAuth redirect.</p>
+            <div class="instructions">
+                <h3>🔧 To get your authorization code:</h3>
+                <ol>
+                    <li>Use your trading bot's <code>/schwab-auth</code> endpoint</li>
+                    <li>Visit the provided authorization URL</li>
+                    <li>Log in to Schwab and authorize your app</li>
+                    <li>You'll be redirected back here with the code</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div id="loading">
+            <p>🔍 Checking for authorization code...</p>
+        </div>
+    </div>
 
+    <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        function copyCode() {
+            var code = document.getElementById('authCode').textContent;
+            navigator.clipboard.writeText(code).then(function() {
+                alert('Authorization code copied to clipboard!');
+            });
+        }
+
+        // Check for authorization code in URL
+        window.onload = function() {
+            var code = getUrlParameter('code');
+            var error = getUrlParameter('error');
+            
+            document.getElementById('loading').style.display = 'none';
+            
+            if (code) {
+                document.getElementById('authCode').textContent = code;
+                document.getElementById('success').style.display = 'block';
+                
+                // Auto-copy to clipboard if supported
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code);
+                }
+            } else {
+                document.getElementById('error').style.display = 'block';
+                if (error) {
+                    document.getElementById('error').innerHTML += '<p><strong>Error:</strong> ' + error + '</p>';
+                }
+            }
+        };
+    </script>
+</body>
+</html>
